@@ -6,7 +6,7 @@ import java.util.*;
 
 public class L1Main {
     public static void main(String[] args) {
-        //firstTask();
+        firstTask();
 
     }
 
@@ -54,8 +54,9 @@ public class L1Main {
     // если текущий элемент списка > наименьшего в топе - пробегаемся по топу и находим для него место
     // Как вариант запихать всё в дерево(отсортируется само), но по сути выделяем памяти ещё на такое же кол-во объектов поста
     public static List<Post> getTop10(List<Post> posts){
-        posts.sort(Collections.reverseOrder());
-        return posts.subList(0, 10);
+        PriorityQueue<Post> postsQueue = new PriorityQueue<>();
+        postsQueue.addAll(posts);
+        return postsQueue.stream().toList().subList(postsQueue.size(), postsQueue.size() - 10);
     }
 
     public class Post implements Comparable<Post>{

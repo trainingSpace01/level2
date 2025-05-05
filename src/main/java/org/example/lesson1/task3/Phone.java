@@ -8,4 +8,6 @@ import lombok.Getter;
 public class Phone {
     private String number;
     private PhoneType phoneType;
+
+
 }

@@ -1,13 +1,9 @@
 package org.example.lesson1.task3;
-
 import com.github.javafaker.Faker;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.UUID;
 
 @Getter
 @ToString

@@ -1,7 +1,6 @@
 package org.example.lesson1.task3;
 
 import com.github.javafaker.Faker;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 

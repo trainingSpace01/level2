@@ -1,6 +1,8 @@
 package org.example.lesson1;
 import org.example.lesson1.task3.PhoneType;
 import org.example.lesson1.task3.User;
+import org.example.lesson1.task4.SearchServiceTest;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -77,7 +79,9 @@ public class L1Main {
     public static List<Post> getTop10(List<Post> posts){
         PriorityQueue<Post> postsQueue = new PriorityQueue<>();
         postsQueue.addAll(posts);
-        return postsQueue.stream().toList().subList(postsQueue.size(), postsQueue.size() - 10);
+        return postsQueue.stream().
+                toList().
+                subList(postsQueue.size(), postsQueue.size() - 10);
     }
 
     public class Post implements Comparable<Post>{

@@ -1,18 +1,43 @@
 package org.example.lesson1;
-
+import org.example.lesson1.task3.PhoneType;
 import org.example.lesson1.task3.User;
-
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class L1Main {
     public static void main(String[] args) {
-        firstTask();
-
+        //firstTask();
+        //thirdTask();
     }
 
     public static void thirdTask(){
         ArrayList<User> users = new ArrayList<>();
-        //users.add(UUID.randomUUID().toString(), "john", 15, );
+        int checkAge = 58;
+        String checkName = "John";
+        for (int i = 0; i < 6; i++)
+            users.add(new User(i));
+        users.forEach(System.out::println);
+        System.out.println(users.stream().
+                                        filter(x -> Objects.equals(x.getName(), checkName)).
+                                        collect(Collectors.summarizingInt(User::getAge)).getSum());
+        System.out.println("Anyone age > " + checkAge + " is " + users.
+                                                                    stream().
+                                                                    anyMatch(x -> x.getAge() > checkAge));
+        System.out.println(users.stream().flatMap(x -> Stream.of(x.getName())).
+                collect(Collectors.toCollection(LinkedHashSet::new)).toString());
+        System.out.println(users.stream().
+                collect(Collectors.toMap(User::getUniqueID, User::getName)));
+        System.out.println(users.stream().
+                collect(Collectors.groupingBy(User::getAge)));
+        System.out.println(users.stream().
+                filter(x -> x.getPhones() != null)
+                .flatMap(x -> Stream.of(x.getPhones())).
+                flatMap(phones -> phones.stream().flatMap(y -> Stream.of(y.getNumber()))).
+                collect(Collectors.toList()));
+        System.out.println(users.stream().
+                filter(x -> x.getPhones().stream().anyMatch(y -> y.getPhoneType() == PhoneType.STATIONARY)).
+                max(Comparator.comparingInt(User::getAge)));
     }
 
     public static void firstTask(){
@@ -49,10 +74,6 @@ public class L1Main {
         System.out.println(winnerName);
     }
 
-    // Эффективно по памяти - выделений нет. Время - n Log(n).
-    // Быстрее по времени(не факт): создать массив на 10 элементов и сравнивать с наименьшим каждый следующий элемент списка
-    // если текущий элемент списка > наименьшего в топе - пробегаемся по топу и находим для него место
-    // Как вариант запихать всё в дерево(отсортируется само), но по сути выделяем памяти ещё на такое же кол-во объектов поста
     public static List<Post> getTop10(List<Post> posts){
         PriorityQueue<Post> postsQueue = new PriorityQueue<>();
         postsQueue.addAll(posts);

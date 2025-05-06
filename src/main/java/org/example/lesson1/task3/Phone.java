@@ -26,4 +26,5 @@ public class Phone {
         int temp = (Math.random() <= 0.5) ? 1 : 2;
         this.phoneType = (temp == 2) ? PhoneType.MOBILE : PhoneType.STATIONARY;
     }
+
 }
